@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nengchuan.inspection.abnormal.dao.IiAbnormalMapper" >
+  <resultMap id="BaseResultMap" type="com.nengchuan.inspection.abnormal.entity.IiAbnormal" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="station_id" property="stationId" jdbcType="VARCHAR" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="station_type" property="stationType" jdbcType="VARCHAR" />
+    <result column="superior_id" property="superiorId" jdbcType="VARCHAR" />
+    <result column="superior_name" property="superiorName" jdbcType="VARCHAR" />
+    <result column="voltage_grade_id" property="voltageGradeId" jdbcType="VARCHAR" />
+    <result column="voltage_grade_name" property="voltageGradeName" jdbcType="VARCHAR" />
+    <result column="abnormal_situation" property="abnormalSituation" jdbcType="VARCHAR" />
+    <result column="find_time" property="findTime" jdbcType="TIMESTAMP" />
+    <result column="data_source_id" property="dataSourceId" jdbcType="VARCHAR" />
+    <result column="data_source_name" property="dataSourceName" jdbcType="VARCHAR" />
+    <result column="is_abnormal" property="isAbnormal" jdbcType="VARCHAR" />
+    <result column="abnormal_level_id" property="abnormalLevelId" jdbcType="VARCHAR" />
+    <result column="abnormal_level_name" property="abnormalLevelName" jdbcType="VARCHAR" />
+    <result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="confirm_efficiency" property="confirmEfficiency" jdbcType="VARCHAR" />
+    <result column="handle_state" property="handleState" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="VARCHAR" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_id" property="modifyId" jdbcType="VARCHAR" />
+    <result column="modify_name" property="modifyName" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="delete_state" property="deleteState" jdbcType="VARCHAR" />
+    <result column="route_id" property="routeId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, station_id, station_name, station_type, superior_id, superior_name, voltage_grade_id, 
+    voltage_grade_name, abnormal_situation, find_time, data_source_id, data_source_name, 
+    is_abnormal, abnormal_level_id, abnormal_level_name, confirm_time, confirm_efficiency, 
+    handle_state, create_id, create_name, create_time, modify_id, modify_name, modify_time, 
+    delete_state, route_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nengchuan.inspection.abnormal.entity.IiAbnormalCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ii_abnormal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ii_abnormal
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ii_abnormal
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nengchuan.inspection.abnormal.entity.IiAbnormalCriteria" >
+    delete from ii_abnormal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nengchuan.inspection.abnormal.entity.IiAbnormal" >
+    insert into ii_abnormal (id, station_id, station_name, 
+      station_type, superior_id, superior_name, 
+      voltage_grade_id, voltage_grade_name, abnormal_situation, 
+      find_time, data_source_id, data_source_name, 
+      is_abnormal, abnormal_level_id, abnormal_level_name, 
+      confirm_time, confirm_efficiency, handle_state, 
+      create_id, create_name, create_time, 
+      modify_id, modify_name, modify_time, 
+      delete_state, route_id)
+    values (#{id,jdbcType=VARCHAR}, #{stationId,jdbcType=VARCHAR}, #{stationName,jdbcType=VARCHAR}, 
+      #{stationType,jdbcType=VARCHAR}, #{superiorId,jdbcType=VARCHAR}, #{superiorName,jdbcType=VARCHAR}, 
+      #{voltageGradeId,jdbcType=VARCHAR}, #{voltageGradeName,jdbcType=VARCHAR}, #{abnormalSituation,jdbcType=VARCHAR}, 
+      #{findTime,jdbcType=TIMESTAMP}, #{dataSourceId,jdbcType=VARCHAR}, #{dataSourceName,jdbcType=VARCHAR}, 
+      #{isAbnormal,jdbcType=VARCHAR}, #{abnormalLevelId,jdbcType=VARCHAR}, #{abnormalLevelName,jdbcType=VARCHAR}, 
+      #{confirmTime,jdbcType=TIMESTAMP}, #{confirmEfficiency,jdbcType=VARCHAR}, #{handleState,jdbcType=VARCHAR}, 
+      #{createId,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyId,jdbcType=VARCHAR}, #{modifyName,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{deleteState,jdbcType=VARCHAR}, #{routeId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nengchuan.inspection.abnormal.entity.IiAbnormal" >
+    insert into ii_abnormal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stationId != null" >
+        station_id,
+      </if>
+      <if test="stationName != null" >
+        station_name,
+      </if>
+      <if test="stationType != null" >
+        station_type,
+      </if>
+      <if test="superiorId != null" >
+        superior_id,
+      </if>
+      <if test="superiorName != null" >
+        superior_name,
+      </if>
+      <if test="voltageGradeId != null" >
+        voltage_grade_id,
+      </if>
+      <if test="voltageGradeName != null" >
+        voltage_grade_name,
+      </if>
+      <if test="abnormalSituation != null" >
+        abnormal_situation,
+      </if>
+      <if test="findTime != null" >
+        find_time,
+      </if>
+      <if test="dataSourceId != null" >
+        data_source_id,
+      </if>
+      <if test="dataSourceName != null" >
+        data_source_name,
+      </if>
+      <if test="isAbnormal != null" >
+        is_abnormal,
+      </if>
+      <if test="abnormalLevelId != null" >
+        abnormal_level_id,
+      </if>
+      <if test="abnormalLevelName != null" >
+        abnormal_level_name,
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time,
+      </if>
+      <if test="confirmEfficiency != null" >
+        confirm_efficiency,
+      </if>
+      <if test="handleState != null" >
+        handle_state,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyId != null" >
+        modify_id,
+      </if>
+      <if test="modifyName != null" >
+        modify_name,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="deleteState != null" >
+        delete_state,
+      </if>
+      <if test="routeId != null" >
+        route_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stationId != null" >
+        #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationType != null" >
+        #{stationType,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorId != null" >
+        #{superiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorName != null" >
+        #{superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="voltageGradeId != null" >
+        #{voltageGradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="voltageGradeName != null" >
+        #{voltageGradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalSituation != null" >
+        #{abnormalSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="findTime != null" >
+        #{findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataSourceId != null" >
+        #{dataSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSourceName != null" >
+        #{dataSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="isAbnormal != null" >
+        #{isAbnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalLevelId != null" >
+        #{abnormalLevelId,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalLevelName != null" >
+        #{abnormalLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmTime != null" >
+        #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmEfficiency != null" >
+        #{confirmEfficiency,jdbcType=VARCHAR},
+      </if>
+      <if test="handleState != null" >
+        #{handleState,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null" >
+        #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyName != null" >
+        #{modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteState != null" >
+        #{deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="routeId != null" >
+        #{routeId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nengchuan.inspection.abnormal.entity.IiAbnormalCriteria" resultType="java.lang.Integer" >
+    select count(*) from ii_abnormal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ii_abnormal
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationId != null" >
+        station_id = #{record.stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationName != null" >
+        station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationType != null" >
+        station_type = #{record.stationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superiorId != null" >
+        superior_id = #{record.superiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superiorName != null" >
+        superior_name = #{record.superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voltageGradeId != null" >
+        voltage_grade_id = #{record.voltageGradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voltageGradeName != null" >
+        voltage_grade_name = #{record.voltageGradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abnormalSituation != null" >
+        abnormal_situation = #{record.abnormalSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.findTime != null" >
+        find_time = #{record.findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dataSourceId != null" >
+        data_source_id = #{record.dataSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataSourceName != null" >
+        data_source_name = #{record.dataSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAbnormal != null" >
+        is_abnormal = #{record.isAbnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abnormalLevelId != null" >
+        abnormal_level_id = #{record.abnormalLevelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abnormalLevelName != null" >
+        abnormal_level_name = #{record.abnormalLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.confirmTime != null" >
+        confirm_time = #{record.confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.confirmEfficiency != null" >
+        confirm_efficiency = #{record.confirmEfficiency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleState != null" >
+        handle_state = #{record.handleState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createId != null" >
+        create_id = #{record.createId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createName != null" >
+        create_name = #{record.createName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyId != null" >
+        modify_id = #{record.modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyName != null" >
+        modify_name = #{record.modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteState != null" >
+        delete_state = #{record.deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.routeId != null" >
+        route_id = #{record.routeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ii_abnormal
+    set id = #{record.id,jdbcType=VARCHAR},
+      station_id = #{record.stationId,jdbcType=VARCHAR},
+      station_name = #{record.stationName,jdbcType=VARCHAR},
+      station_type = #{record.stationType,jdbcType=VARCHAR},
+      superior_id = #{record.superiorId,jdbcType=VARCHAR},
+      superior_name = #{record.superiorName,jdbcType=VARCHAR},
+      voltage_grade_id = #{record.voltageGradeId,jdbcType=VARCHAR},
+      voltage_grade_name = #{record.voltageGradeName,jdbcType=VARCHAR},
+      abnormal_situation = #{record.abnormalSituation,jdbcType=VARCHAR},
+      find_time = #{record.findTime,jdbcType=TIMESTAMP},
+      data_source_id = #{record.dataSourceId,jdbcType=VARCHAR},
+      data_source_name = #{record.dataSourceName,jdbcType=VARCHAR},
+      is_abnormal = #{record.isAbnormal,jdbcType=VARCHAR},
+      abnormal_level_id = #{record.abnormalLevelId,jdbcType=VARCHAR},
+      abnormal_level_name = #{record.abnormalLevelName,jdbcType=VARCHAR},
+      confirm_time = #{record.confirmTime,jdbcType=TIMESTAMP},
+      confirm_efficiency = #{record.confirmEfficiency,jdbcType=VARCHAR},
+      handle_state = #{record.handleState,jdbcType=VARCHAR},
+      create_id = #{record.createId,jdbcType=VARCHAR},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_id = #{record.modifyId,jdbcType=VARCHAR},
+      modify_name = #{record.modifyName,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      delete_state = #{record.deleteState,jdbcType=VARCHAR},
+      route_id = #{record.routeId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nengchuan.inspection.abnormal.entity.IiAbnormal" >
+    update ii_abnormal
+    <set >
+      <if test="stationId != null" >
+        station_id = #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationType != null" >
+        station_type = #{stationType,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorId != null" >
+        superior_id = #{superiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorName != null" >
+        superior_name = #{superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="voltageGradeId != null" >
+        voltage_grade_id = #{voltageGradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="voltageGradeName != null" >
+        voltage_grade_name = #{voltageGradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalSituation != null" >
+        abnormal_situation = #{abnormalSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="findTime != null" >
+        find_time = #{findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataSourceId != null" >
+        data_source_id = #{dataSourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSourceName != null" >
+        data_source_name = #{dataSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="isAbnormal != null" >
+        is_abnormal = #{isAbnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalLevelId != null" >
+        abnormal_level_id = #{abnormalLevelId,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalLevelName != null" >
+        abnormal_level_name = #{abnormalLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmTime != null" >
+        confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmEfficiency != null" >
+        confirm_efficiency = #{confirmEfficiency,jdbcType=VARCHAR},
+      </if>
+      <if test="handleState != null" >
+        handle_state = #{handleState,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null" >
+        modify_id = #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyName != null" >
+        modify_name = #{modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteState != null" >
+        delete_state = #{deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="routeId != null" >
+        route_id = #{routeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nengchuan.inspection.abnormal.entity.IiAbnormal" >
+    update ii_abnormal
+    set station_id = #{stationId,jdbcType=VARCHAR},
+      station_name = #{stationName,jdbcType=VARCHAR},
+      station_type = #{stationType,jdbcType=VARCHAR},
+      superior_id = #{superiorId,jdbcType=VARCHAR},
+      superior_name = #{superiorName,jdbcType=VARCHAR},
+      voltage_grade_id = #{voltageGradeId,jdbcType=VARCHAR},
+      voltage_grade_name = #{voltageGradeName,jdbcType=VARCHAR},
+      abnormal_situation = #{abnormalSituation,jdbcType=VARCHAR},
+      find_time = #{findTime,jdbcType=TIMESTAMP},
+      data_source_id = #{dataSourceId,jdbcType=VARCHAR},
+      data_source_name = #{dataSourceName,jdbcType=VARCHAR},
+      is_abnormal = #{isAbnormal,jdbcType=VARCHAR},
+      abnormal_level_id = #{abnormalLevelId,jdbcType=VARCHAR},
+      abnormal_level_name = #{abnormalLevelName,jdbcType=VARCHAR},
+      confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+      confirm_efficiency = #{confirmEfficiency,jdbcType=VARCHAR},
+      handle_state = #{handleState,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_name = #{modifyName,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      delete_state = #{deleteState,jdbcType=VARCHAR},
+      route_id = #{routeId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

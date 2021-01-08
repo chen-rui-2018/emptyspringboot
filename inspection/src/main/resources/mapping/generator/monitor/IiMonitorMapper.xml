@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nengchuan.inspection.monitor.dao.IiMonitorMapper" >
+  <resultMap id="BaseResultMap" type="com.nengchuan.inspection.monitor.entity.IiMonitor" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="tree_name" property="treeName" jdbcType="VARCHAR" />
+    <result column="tree_id" property="treeId" jdbcType="VARCHAR" />
+    <result column="tree_superior_id" property="treeSuperiorId" jdbcType="VARCHAR" />
+    <result column="tree_hierarchy" property="treeHierarchy" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="VARCHAR" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_id" property="modifyId" jdbcType="VARCHAR" />
+    <result column="modify_name" property="modifyName" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="delete_state" property="deleteState" jdbcType="VARCHAR" />
+    <result column="route_id" property="routeId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, tree_name, tree_id, tree_superior_id, tree_hierarchy, create_id, create_name, 
+    create_time, modify_id, modify_name, modify_time, delete_state, route_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nengchuan.inspection.monitor.entity.IiMonitorCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ii_monitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ii_monitor
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ii_monitor
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nengchuan.inspection.monitor.entity.IiMonitorCriteria" >
+    delete from ii_monitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nengchuan.inspection.monitor.entity.IiMonitor" >
+    insert into ii_monitor (id, tree_name, tree_id, 
+      tree_superior_id, tree_hierarchy, create_id, 
+      create_name, create_time, modify_id, 
+      modify_name, modify_time, delete_state, 
+      route_id)
+    values (#{id,jdbcType=VARCHAR}, #{treeName,jdbcType=VARCHAR}, #{treeId,jdbcType=VARCHAR}, 
+      #{treeSuperiorId,jdbcType=VARCHAR}, #{treeHierarchy,jdbcType=VARCHAR}, #{createId,jdbcType=VARCHAR}, 
+      #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=VARCHAR}, 
+      #{modifyName,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{deleteState,jdbcType=VARCHAR}, 
+      #{routeId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nengchuan.inspection.monitor.entity.IiMonitor" >
+    insert into ii_monitor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="treeName != null" >
+        tree_name,
+      </if>
+      <if test="treeId != null" >
+        tree_id,
+      </if>
+      <if test="treeSuperiorId != null" >
+        tree_superior_id,
+      </if>
+      <if test="treeHierarchy != null" >
+        tree_hierarchy,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyId != null" >
+        modify_id,
+      </if>
+      <if test="modifyName != null" >
+        modify_name,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="deleteState != null" >
+        delete_state,
+      </if>
+      <if test="routeId != null" >
+        route_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="treeName != null" >
+        #{treeName,jdbcType=VARCHAR},
+      </if>
+      <if test="treeId != null" >
+        #{treeId,jdbcType=VARCHAR},
+      </if>
+      <if test="treeSuperiorId != null" >
+        #{treeSuperiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="treeHierarchy != null" >
+        #{treeHierarchy,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null" >
+        #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyName != null" >
+        #{modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteState != null" >
+        #{deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="routeId != null" >
+        #{routeId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nengchuan.inspection.monitor.entity.IiMonitorCriteria" resultType="java.lang.Integer" >
+    select count(*) from ii_monitor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ii_monitor
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeName != null" >
+        tree_name = #{record.treeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeId != null" >
+        tree_id = #{record.treeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeSuperiorId != null" >
+        tree_superior_id = #{record.treeSuperiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treeHierarchy != null" >
+        tree_hierarchy = #{record.treeHierarchy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createId != null" >
+        create_id = #{record.createId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createName != null" >
+        create_name = #{record.createName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyId != null" >
+        modify_id = #{record.modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyName != null" >
+        modify_name = #{record.modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteState != null" >
+        delete_state = #{record.deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.routeId != null" >
+        route_id = #{record.routeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ii_monitor
+    set id = #{record.id,jdbcType=VARCHAR},
+      tree_name = #{record.treeName,jdbcType=VARCHAR},
+      tree_id = #{record.treeId,jdbcType=VARCHAR},
+      tree_superior_id = #{record.treeSuperiorId,jdbcType=VARCHAR},
+      tree_hierarchy = #{record.treeHierarchy,jdbcType=VARCHAR},
+      create_id = #{record.createId,jdbcType=VARCHAR},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_id = #{record.modifyId,jdbcType=VARCHAR},
+      modify_name = #{record.modifyName,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      delete_state = #{record.deleteState,jdbcType=VARCHAR},
+      route_id = #{record.routeId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nengchuan.inspection.monitor.entity.IiMonitor" >
+    update ii_monitor
+    <set >
+      <if test="treeName != null" >
+        tree_name = #{treeName,jdbcType=VARCHAR},
+      </if>
+      <if test="treeId != null" >
+        tree_id = #{treeId,jdbcType=VARCHAR},
+      </if>
+      <if test="treeSuperiorId != null" >
+        tree_superior_id = #{treeSuperiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="treeHierarchy != null" >
+        tree_hierarchy = #{treeHierarchy,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null" >
+        modify_id = #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyName != null" >
+        modify_name = #{modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteState != null" >
+        delete_state = #{deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="routeId != null" >
+        route_id = #{routeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nengchuan.inspection.monitor.entity.IiMonitor" >
+    update ii_monitor
+    set tree_name = #{treeName,jdbcType=VARCHAR},
+      tree_id = #{treeId,jdbcType=VARCHAR},
+      tree_superior_id = #{treeSuperiorId,jdbcType=VARCHAR},
+      tree_hierarchy = #{treeHierarchy,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_name = #{modifyName,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      delete_state = #{deleteState,jdbcType=VARCHAR},
+      route_id = #{routeId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

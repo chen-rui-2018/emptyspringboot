@@ -1,0 +1,25 @@
+package com.nengchuan.inspection.common.log.annotation;
+
+import java.lang.annotation.*;
+
+/**
+ * controller层的日志打印注解
+ *
+ * @author： chenr
+ * @date： Created on 2018/11/22 15:24
+ * @version： v1.0
+ * @modified By:
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Documented
+public @interface ControllerLog {
+
+    /**
+     * 具体的业务描述.eg.缴费申请
+     */
+    String doAction() ;
+
+
+
+}

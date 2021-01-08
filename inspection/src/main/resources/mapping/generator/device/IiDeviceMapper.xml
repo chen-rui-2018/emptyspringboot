@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nengchuan.inspection.device.dao.IiDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.nengchuan.inspection.device.entity.IiDevice" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="station_type" property="stationType" jdbcType="VARCHAR" />
+    <result column="station_id" property="stationId" jdbcType="VARCHAR" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="superior_id" property="superiorId" jdbcType="VARCHAR" />
+    <result column="superior_name" property="superiorName" jdbcType="VARCHAR" />
+    <result column="device_type_id" property="deviceTypeId" jdbcType="VARCHAR" />
+    <result column="device_type_name" property="deviceTypeName" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="current_state" property="currentState" jdbcType="VARCHAR" />
+    <result column="abnormal_situation" property="abnormalSituation" jdbcType="VARCHAR" />
+    <result column="find_time" property="findTime" jdbcType="TIMESTAMP" />
+    <result column="create_id" property="createId" jdbcType="VARCHAR" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_id" property="modifyId" jdbcType="VARCHAR" />
+    <result column="modify_name" property="modifyName" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="delete_state" property="deleteState" jdbcType="VARCHAR" />
+    <result column="route_id" property="routeId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, station_type, station_id, station_name, superior_id, superior_name, device_type_id, 
+    device_type_name, device_id, device_name, current_state, abnormal_situation, find_time, 
+    create_id, create_name, create_time, modify_id, modify_name, modify_time, delete_state, 
+    route_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nengchuan.inspection.device.entity.IiDeviceCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ii_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ii_device
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ii_device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nengchuan.inspection.device.entity.IiDeviceCriteria" >
+    delete from ii_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nengchuan.inspection.device.entity.IiDevice" >
+    insert into ii_device (id, station_type, station_id, 
+      station_name, superior_id, superior_name, 
+      device_type_id, device_type_name, device_id, 
+      device_name, current_state, abnormal_situation, 
+      find_time, create_id, create_name, 
+      create_time, modify_id, modify_name, 
+      modify_time, delete_state, route_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{stationType,jdbcType=VARCHAR}, #{stationId,jdbcType=VARCHAR}, 
+      #{stationName,jdbcType=VARCHAR}, #{superiorId,jdbcType=VARCHAR}, #{superiorName,jdbcType=VARCHAR}, 
+      #{deviceTypeId,jdbcType=VARCHAR}, #{deviceTypeName,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, 
+      #{deviceName,jdbcType=VARCHAR}, #{currentState,jdbcType=VARCHAR}, #{abnormalSituation,jdbcType=VARCHAR}, 
+      #{findTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyId,jdbcType=VARCHAR}, #{modifyName,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{deleteState,jdbcType=VARCHAR}, #{routeId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nengchuan.inspection.device.entity.IiDevice" >
+    insert into ii_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stationType != null" >
+        station_type,
+      </if>
+      <if test="stationId != null" >
+        station_id,
+      </if>
+      <if test="stationName != null" >
+        station_name,
+      </if>
+      <if test="superiorId != null" >
+        superior_id,
+      </if>
+      <if test="superiorName != null" >
+        superior_name,
+      </if>
+      <if test="deviceTypeId != null" >
+        device_type_id,
+      </if>
+      <if test="deviceTypeName != null" >
+        device_type_name,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="deviceName != null" >
+        device_name,
+      </if>
+      <if test="currentState != null" >
+        current_state,
+      </if>
+      <if test="abnormalSituation != null" >
+        abnormal_situation,
+      </if>
+      <if test="findTime != null" >
+        find_time,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyId != null" >
+        modify_id,
+      </if>
+      <if test="modifyName != null" >
+        modify_name,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="deleteState != null" >
+        delete_state,
+      </if>
+      <if test="routeId != null" >
+        route_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stationType != null" >
+        #{stationType,jdbcType=VARCHAR},
+      </if>
+      <if test="stationId != null" >
+        #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorId != null" >
+        #{superiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorName != null" >
+        #{superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeId != null" >
+        #{deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeName != null" >
+        #{deviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="currentState != null" >
+        #{currentState,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalSituation != null" >
+        #{abnormalSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="findTime != null" >
+        #{findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null" >
+        #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyName != null" >
+        #{modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteState != null" >
+        #{deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="routeId != null" >
+        #{routeId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nengchuan.inspection.device.entity.IiDeviceCriteria" resultType="java.lang.Integer" >
+    select count(*) from ii_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ii_device
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationType != null" >
+        station_type = #{record.stationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationId != null" >
+        station_id = #{record.stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationName != null" >
+        station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superiorId != null" >
+        superior_id = #{record.superiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superiorName != null" >
+        superior_name = #{record.superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeId != null" >
+        device_type_id = #{record.deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeName != null" >
+        device_type_name = #{record.deviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceName != null" >
+        device_name = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentState != null" >
+        current_state = #{record.currentState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abnormalSituation != null" >
+        abnormal_situation = #{record.abnormalSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.findTime != null" >
+        find_time = #{record.findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createId != null" >
+        create_id = #{record.createId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createName != null" >
+        create_name = #{record.createName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyId != null" >
+        modify_id = #{record.modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyName != null" >
+        modify_name = #{record.modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteState != null" >
+        delete_state = #{record.deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.routeId != null" >
+        route_id = #{record.routeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ii_device
+    set id = #{record.id,jdbcType=VARCHAR},
+      station_type = #{record.stationType,jdbcType=VARCHAR},
+      station_id = #{record.stationId,jdbcType=VARCHAR},
+      station_name = #{record.stationName,jdbcType=VARCHAR},
+      superior_id = #{record.superiorId,jdbcType=VARCHAR},
+      superior_name = #{record.superiorName,jdbcType=VARCHAR},
+      device_type_id = #{record.deviceTypeId,jdbcType=VARCHAR},
+      device_type_name = #{record.deviceTypeName,jdbcType=VARCHAR},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      device_name = #{record.deviceName,jdbcType=VARCHAR},
+      current_state = #{record.currentState,jdbcType=VARCHAR},
+      abnormal_situation = #{record.abnormalSituation,jdbcType=VARCHAR},
+      find_time = #{record.findTime,jdbcType=TIMESTAMP},
+      create_id = #{record.createId,jdbcType=VARCHAR},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_id = #{record.modifyId,jdbcType=VARCHAR},
+      modify_name = #{record.modifyName,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      delete_state = #{record.deleteState,jdbcType=VARCHAR},
+      route_id = #{record.routeId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nengchuan.inspection.device.entity.IiDevice" >
+    update ii_device
+    <set >
+      <if test="stationType != null" >
+        station_type = #{stationType,jdbcType=VARCHAR},
+      </if>
+      <if test="stationId != null" >
+        station_id = #{stationId,jdbcType=VARCHAR},
+      </if>
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorId != null" >
+        superior_id = #{superiorId,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorName != null" >
+        superior_name = #{superiorName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeId != null" >
+        device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeName != null" >
+        device_type_name = #{deviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        device_name = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="currentState != null" >
+        current_state = #{currentState,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalSituation != null" >
+        abnormal_situation = #{abnormalSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="findTime != null" >
+        find_time = #{findTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyId != null" >
+        modify_id = #{modifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyName != null" >
+        modify_name = #{modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteState != null" >
+        delete_state = #{deleteState,jdbcType=VARCHAR},
+      </if>
+      <if test="routeId != null" >
+        route_id = #{routeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nengchuan.inspection.device.entity.IiDevice" >
+    update ii_device
+    set station_type = #{stationType,jdbcType=VARCHAR},
+      station_id = #{stationId,jdbcType=VARCHAR},
+      station_name = #{stationName,jdbcType=VARCHAR},
+      superior_id = #{superiorId,jdbcType=VARCHAR},
+      superior_name = #{superiorName,jdbcType=VARCHAR},
+      device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+      device_type_name = #{deviceTypeName,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      device_name = #{deviceName,jdbcType=VARCHAR},
+      current_state = #{currentState,jdbcType=VARCHAR},
+      abnormal_situation = #{abnormalSituation,jdbcType=VARCHAR},
+      find_time = #{findTime,jdbcType=TIMESTAMP},
+      create_id = #{createId,jdbcType=VARCHAR},
+      create_name = #{createName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_id = #{modifyId,jdbcType=VARCHAR},
+      modify_name = #{modifyName,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      delete_state = #{deleteState,jdbcType=VARCHAR},
+      route_id = #{routeId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
